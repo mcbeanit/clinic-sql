@@ -2,7 +2,7 @@ use mcbean_clinic
 
 -- import the patient_demographic table from echart into mcbean_clinic
 -- First NULL fields that have blanks strings, and NULL
---   columns not of interest
+-- columns not of interest
 
 update patient_demographics set patientId = null
 
