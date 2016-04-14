@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
--- Author:		RMcBean
+-- Author:	Robert McBean
 -- Create date: 17-Oct-2014
 -- Description:	Update a patient record, Update the referring doctor id.
 --              Update the local doctor.
