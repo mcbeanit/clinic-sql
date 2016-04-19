@@ -8,28 +8,31 @@ GO
 -- Author:		R.McBean
 -- Create date: 1-Apr-2016
 -- Description:	Insert to the DocumentLocationTable and increment the 
---              page number.
-
+--              page number if not provided. @PageNumber = 0 means find
+---             and assign the next page number.
 -- =============================================================================
 
 ALTER PROCEDURE [dbo].[spInsertDocumentLocation]
 
 	@DocumentId INT,
 	@DocumentLocationRootId INT,
-	@Path VARCHAR(1000)
+	@Path VARCHAR(1000),
+	@PageNumber INT
 	
 AS
 
 BEGIN
 
 	SET NOCOUNT ON;
-	DECLARE @PageNumber AS INT
 	
-	SET @PageNumber = (SELECT COUNT(*) FROM DocumentLocation WHERE DocumentId = @DocumentId);
+	IF PageNumber = 0 
+	BEGIN	
+		SET @PageNumber = (SELECT COUNT(*) FROM DocumentLocation WHERE DocumentId = @DocumentId);
+	END
 	
-	INSERT INTO DocumentLocation(DocumentLocationRootId, Path, DocumentId, PageNumber)
-	VALUES
-	(@DocumentLocationRootId,@Path,@DocumentId, @PageNumber);
+	INSERT INTO DocumentLocation(DocumentLocationRootId, [Path], DocumentId, PageNumber)
+		VALUES
+		(@DocumentLocationRootId,@Path,@DocumentId, @PageNumber);
 
 END
 	
